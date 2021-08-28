@@ -1,4 +1,4 @@
-import React, { VFC, memo } from "react";
+ import React, { VFC, memo } from "react";
 import {
   Button,
   Drawer,
@@ -22,7 +22,7 @@ export const MenuDrawer: VFC<Props> = memo(props => {
     onClickHome,
     onClickUserManagement,
     onClickSetting
-  } = props;
+  } = props; // propsで親コンポーネントから関数を受け取る
 
   return (
     <Drawer placement="left" size="xs" onClose={onClose} isOpen={isOpen}>

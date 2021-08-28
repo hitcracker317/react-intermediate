@@ -7,10 +7,10 @@ import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = useHistory();  //useHistoryで画面遷移
 
-  const history = useHistory();
-
-  const onClickHome = useCallback(() => history.push("/home"), []);
+  //再レンダリングされないためにuseCallback使用してる。home画面に遷移
+  const onClickHome = useCallback(() => history.push("/home"), [history]);
   const onClickUserManagement = useCallback(
     () => history.push("/home/user_management"),
     []
