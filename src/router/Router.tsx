@@ -5,6 +5,7 @@ import { Login } from "../components/pages/Login"
 import { homeRoutes } from '../router/HomeRoute'
 import { Page404 } from "../components/pages/404"
 import { HeaderLayout } from "../components/templates/HeaderLayout"
+import { LoginUserProvider } from "../hooks/providers/useLoginUserProvider";
 
 export const Router = () => {
   return (
@@ -14,15 +15,15 @@ export const Router = () => {
     *
     * */
     <Switch>
-      <Route exact path="/">
-        <Login />
-      </Route>
-      <Route
-        path="/home"
-        render={({ match: { url } }) => (
-          <Switch>
-            {
-              homeRoutes.map((route) => (
+       <LoginUserProvider>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route
+          path="/home"
+          render={({ match: { url } }) => (
+            <Switch>
+              {homeRoutes.map(route => (
                 <Route
                   key={route.path}
                   exact={route.exact}
@@ -30,12 +31,12 @@ export const Router = () => {
                 >
                   <HeaderLayout>{route.children}</HeaderLayout>
                 </Route>
-              )
-            )}
-          </Switch>
-        )}
-      />
-      <Route path='*'>
+              ))}
+            </Switch>
+          )}
+        />
+      </LoginUserProvider>
+      <Route path="*">
         <Page404 />
       </Route>
     </Switch>
